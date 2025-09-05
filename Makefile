@@ -19,7 +19,7 @@ OUTDIR      := $(PROJDIR)/output
 #---------------------------------------------------------------------------------
 TARGET      := $(notdir $(CURDIR))
 BUILD       := build
-OUTPUT_DIR  := atmosphere/contents/0100000000000000/exefs
+OUTPUT_DIR  := atmosphere/contents/0100000000000799/exefs
 OUTPUT_FILE := main
 
 #---------------------------------------------------------------------------------
