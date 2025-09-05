@@ -10,9 +10,10 @@ endif
 
 PROJDIR     := $(CURDIR)
 SOURCES     := $(PROJDIR)/src
-INCLUDES    := $(PROJDIR)/include
+INCLUDES    := $(PROJDIR)/src
 DATA        := $(PROJDIR)/data
 OUTDIR      := $(PROJDIR)/output
+LIBNX       := $(DEVKITPRO)/libnx
 
 #---------------------------------------------------------------------------------
 # 目标设置
