@@ -7,6 +7,22 @@ ifeq ($(strip $(DEVKITPRO)),)
 $(error "请设置DEVKITPRO环境变量。请参考README.md中的安装说明。")
 endif
 
+# 确保使用正确的工具链
+DEVKITARM := $(DEVKITPRO)/devkitARM
+DEVKITPPC := $(DEVKITPRO)/devkitPPC
+
+# 设置工具链前缀
+aarch64-none-elf-gcc := $(DEVKITPRO)/devkitA64/bin/aarch64-none-elf-gcc
+aarch64-none-elf-g++ := $(DEVKITPRO)/devkitA64/bin/aarch64-none-elf-g++
+aarch64-none-elf-ld := $(DEVKITPRO)/devkitA64/bin/aarch64-none-elf-ld
+aarch64-none-elf-nm := $(DEVKITPRO)/devkitA64/bin/aarch64-none-elf-nm
+
+# 显式设置编译工具变量
+CC := $(aarch64-none-elf-gcc)
+CXX := $(aarch64-none-elf-g++)
+LD := $(aarch64-none-elf-ld)
+NM := $(aarch64-none-elf-nm)
+
 # 包含switch开发环境规则
 include $(DEVKITPRO)/libnx/switch_rules
 
@@ -21,12 +37,16 @@ SOURCES       := src
 INCLUDES      := src
 
 # 编译选项
-ARCH          := -march=armv8-a+crc+crypto -mtune=cortex-a57 -fPIE
+# 编译器特定选项
+COMPILER_FLAGS := -march=armv8-a+crc+crypto -mtune=cortex-a57 -fPIE -mtp=soft
+# 链接器可识别的选项
+LINKER_FLAGS   := -march=armv8-a+crc+crypto -fPIE
+
 CFLAGS        := -g -Wall -O2 -ffunction-sections \
-                 $(ARCH) -mtp=soft -D__SWITCH__
+                 $(COMPILER_FLAGS) -D__SWITCH__
 CXXFLAGS      := $(CFLAGS) -fno-rtti -fno-exceptions
-ASFLAGS       := -g $(ARCH)
-LDFLAGS       := -specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $(PROJ_NAME)).map
+ASFLAGS       := -g $(COMPILER_FLAGS)
+LDFLAGS       := -specs=$(DEVKITPRO)/libnx/switch.specs -g $(LINKER_FLAGS) -Wl,-Map,$(notdir $(PROJ_NAME)).map
 
 # 库文件
 LIBS          := -lnx
