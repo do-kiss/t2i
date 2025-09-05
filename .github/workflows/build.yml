@@ -26,3 +26,4 @@ jobs:
         path: |
           output/atmosphere/contents/0100000000000000/exefs/main
           atmosphere/contents/0100000000000000/flags/boot2.flag
+        if-no-files-found: error
