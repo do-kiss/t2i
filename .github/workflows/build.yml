@@ -17,6 +17,8 @@ jobs:
     
     - name: Build module
       run: |
+        mkdir -p atmosphere/contents/0100000000000799/flags
+        touch atmosphere/contents/0100000000000799/flags/boot2.flag
         make
         
     - name: Upload artifacts
@@ -24,6 +26,6 @@ jobs:
       with:
         name: switch-module
         path: |
-          output/atmosphere/contents/0100000000000000/exefs/main
-          atmosphere/contents/0100000000000000/flags/boot2.flag
+          output/atmosphere/contents/0100000000000799/exefs/main
+          atmosphere/contents/0100000000000799/flags/boot2.flag
         if-no-files-found: error
