@@ -79,6 +79,7 @@ $(BUILD):
 	@[ -d $(OUTDIR)/$(OUTPUT_DIR) ] || mkdir -p $(OUTDIR)/$(OUTPUT_DIR)
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 	@cp $(BUILD)/$(TARGET).nso $(OUTDIR)/$(OUTPUT_DIR)/$(OUTPUT_FILE)
+	@mkdir -p atmosphere/contents/0100000000000000/flags
 
 #---------------------------------------------------------------------------------
 clean:
