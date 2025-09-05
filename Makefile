@@ -21,9 +21,9 @@ SOURCES       := src
 INCLUDES      := src
 
 # 编译选项
-ARCH          := -march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
+ARCH          := -march=armv8-a+crc+crypto -mtune=cortex-a57 -fPIE
 CFLAGS        := -g -Wall -O2 -ffunction-sections \
-                 $(ARCH) -D__SWITCH__
+                 $(ARCH) -mtp=soft -D__SWITCH__
 CXXFLAGS      := $(CFLAGS) -fno-rtti -fno-exceptions
 ASFLAGS       := -g $(ARCH)
 LDFLAGS       := -specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $(PROJ_NAME)).map
