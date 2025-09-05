@@ -17,8 +17,13 @@ jobs:
     
     - name: Build module
       run: |
+        # 打印环境信息用于调试
+        echo "DEVKITPRO: $DEVKITPRO"
+        echo "PATH: $PATH"
+        # 创建必要的目录和文件
         mkdir -p atmosphere/contents/0100000000000799/flags
         touch atmosphere/contents/0100000000000799/flags/boot2.flag
+        # 编译项目
         make
         
     - name: Upload artifacts
